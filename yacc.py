@@ -1,138 +1,97 @@
+import inspect
 import ply.yacc as yacc
+import ply.lex as lex  # Importa lex
 from lex import tokens
-import lex
+import csv
+import sys
+
 def p_json(p):
-    'JSON : OBJECT'
-    p[0] = p[1]
-    print(p[0])
-
-def p_object(p):
-    'OBJECT : LBRACE PAIR_LIST RBRACE'
+    'json : LLAVE_IZQ elementos LLAVE_DER'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_pair_list(p):
-    'PAIR_LIST : PAIR COMMA PAIR_LIST'
+def p_elementos_1(p):
+    'elementos : par COMA elementos'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_pair_list_single(p):
-    'PAIR_LIST : PAIR'
+def p_elementos_2(p):
+    'elementos : par'
     p[0] = p[1]
-    print(p[0])
 
-def p_pair(p):
-    'PAIR : STRING COLON VALUE'
+def p_par_id(p):
+    'par : ID DOSPUNTOS objeto'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_value(p):
-    '''VALUE : STRING
-             | NUMBER
-             | OBJECT
-             | ARRAY
-             | TRUE
-             | FALSE
-             | NULL'''
-    p[0] = p[1]
-    print(p[0])
-
-def p_array(p):
-    'ARRAY : LBRACKET ELEMENT_LIST RBRACKET'
+def p_par_name(p):
+    'par : NAME DOSPUNTOS CADENA'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_element_list(p):
-    'ELEMENT_LIST : ELEMENT COMMA ELEMENT_LIST'
+def p_par_email(p):
+    'par : EMAIL DOSPUNTOS CADENA'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_element_list_single(p):
-    'ELEMENT_LIST : ELEMENT'
-    p[0] = p[1]
-    print(p[0])
-
-def p_element(p):
-    'ELEMENT : VALUE'
-    p[0] = p[1]
-    print(p[0])
-
-def p_string(p):
-    'STRING : QUOTE CHAR_LIST QUOTE'
+def p_par_movie_id(p):
+    'par : MOVIE_ID DOSPUNTOS objeto'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_char_list(p):
-    'CHAR_LIST : CHAR CHAR_LIST'
-    p[0] = p[1] + p[2]
-    print(p[0])
-
-def p_char_list_single(p):
-    'CHAR_LIST : CHAR'
-    p[0] = p[1]
-    print(p[0])
-
-def p_number(p):
-    'NUMBER : INTEGER FRACTION EXPONENT'
+def p_par_text(p):
+    'par : TEXT DOSPUNTOS CADENA'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_integer(p):
-    '''INTEGER : DIGIT
-               | DIGIT1_9 DIGITS'''
-    p[0] = p[1]
-    print(p[0])
-
-def p_fraction(p):
-    'FRACTION : DOT DIGITS'
-    p[0] = p[1] + p[2]
-    print(p[0])
-
-def p_exponent(p):
-    'EXPONENT : E SIGN DIGITS'
+def p_par_date(p):
+    'par : DATE DOSPUNTOS objeto'
     p[0] = p[1] + p[2] + p[3]
-    print(p[0])
 
-def p_sign(p):
-    '''SIGN : PLUS
-            | MINUS'''
-    p[0] = p[1]
-    print(p[0])
+def p_par_id(p):
+    'par : CADENA DOSPUNTOS objeto'
+    p[0] = p[1] + p[2] + p[3]
 
-def p_digits(p):
-    'DIGITS : DIGIT DIGITS'
-    p[0] = p[1] + p[2]
-    print(p[0])
+def p_par_value(p):
+    'par : CADENA DOSPUNTOS CADENA'
+    p[0] = p[1] + p[2] + p[3]
 
-def p_digits_single(p):
-    'DIGITS : DIGIT'
-    p[0] = p[1]
-    print(p[0])
+def p_objeto_1(p):
+    'objeto : LLAVE_IZQ par LLAVE_DER'
+    p[0] = p[1] + p[2] + p[3]
 
-def p_true(p):
-    'TRUE : true'
-    p[0] = p[1]
-    print(p[0])
+def p_objeto_2(p):
+    'objeto : LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER'
+    p[0] = p[1] + p[2] + p[3] + p[4] + p[5]
 
-def p_false(p):
-    'FALSE : false'
-    p[0] = p[1]
-    print(p[0])
-
-def p_null(p):
-    'NULL : null'
-    p[0] = p[1]
-    print(p[0])
+def p_objeto_3(p):
+    'objeto : LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
+    p[0] = p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7] + p[8] + p[9]
 
 def p_error(p):
-    print("Syntax error in input!" + str(p))
+    print("Error de sintaxis en '%s'" % p.value)
 
 parser = yacc.yacc()
 
 with open('/Users/samuelromero/Desktop/LexYaccMiniProject/JSON/JSON-PROJECT/test.json', 'r') as file:
-    file_content = file.read()
+    contenido_archivo = file.read()
 
-lex.lexer.input(file_content)
+# Asegúrate de que lex.lexer está definido correctamente en el módulo lex
+lex.lexer.input(contenido_archivo)
 
 for tok in lex.lexer:
     print(tok)
+
+# Analiza la entrada
+resultado = parser.parse(contenido_archivo)
+print(resultado)
+
+rules = []
+for name, obj in inspect.getmembers(sys.modules[__name__]):
+    if inspect.isfunction(obj) and name.startswith('p_'):
+        docstring = inspect.getdoc(obj)
+        if docstring:
+            rule, definition = docstring.split(' : ')
+            rules.append({'rule': rule, 'definition': definition})
+
+
+with open('grammar_rules.csv', 'w', newline='') as csvfile:
+    fieldnames = ['rule', 'definition']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for rule in rules:
+        writer.writerow(rule)

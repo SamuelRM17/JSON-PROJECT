@@ -1,33 +1,39 @@
 import ply.lex as lex
+
 tokens = (
-    'LBRACE',
-    'RBRACE',
-    'LBRACKET',
-    'RBRACKET',
-    'COMMA',
-    'COLON',
-    'STRING',
-    'NUMBER',
-    'TRUE',
-    'FALSE',
-    'NULL'
+    'LLAVE_IZQ',
+    'LLAVE_DER',
+    'COMA',
+    'DOSPUNTOS',
+    'CADENA',
+    'ID',
+    'OID',
+    'NAME',
+    'EMAIL',
+    'MOVIE_ID',
+    'TEXT',
+    'DATE',
+    'NUMBERLONG'
 )
 
-t_LBRACE = r'\{'
-t_RBRACE = r'\}'
-t_LBRACKET = r'\['
-t_RBRACKET = r'\]'
-t_COMMA = r','
-t_COLON = r':'
-t_STRING = r'"([^"\\]|\\.)*"'
-t_NUMBER = r'-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?'
-t_TRUE = r'true'
-t_FALSE = r'false'
-t_NULL = r'null'
+t_LLAVE_IZQ = r'\{'
+t_LLAVE_DER = r'\}'
+t_COMA = r','
+t_DOSPUNTOS = r':'
+t_CADENA = r'"([^"\\]|\\.)*"'
+t_ID = r'"\_id"'
+t_OID = r'"\$oid"'
+t_NAME = r'"name"'
+t_EMAIL = r'"email"'
+t_MOVIE_ID = r'"movie_id"'
+t_TEXT = r'"text"'
+t_DATE = r'"date"'
+t_NUMBERLONG = r'"\$numberLong"'
+
 t_ignore = ' \t\n'
 
 def t_error(t):
-    print(f"Illegal character: '{t.value[0]}'")
+    print(f"Carácter ilegal: '{t.value[0]}'")
     t.lexer.skip(1)
 
 lexer = lex.lex()

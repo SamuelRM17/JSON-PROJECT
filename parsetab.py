@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'body body_end h1 h1_end head head_end html html_end p p_end texto title title_endHTML : html CONTENT html_endCONTENT : HEADER BODYHEADER : head TITLE head_endTITLE : title TEXTO title_endBODY : body H1 PARAGRAPH body_endH1 : h1 TEXTO h1_endPARAGRAPH : p TEXTO p_end PARAGRAPHPARAGRAPH : TEXTO : textoTEXTO : '
+_lr_signature = 'CADENA COMA DATE DOSPUNTOS EMAIL ID LLAVE_DER LLAVE_IZQ MOVIE_ID NAME NUMBERLONG OID TEXTjson : LLAVE_IZQ elementos LLAVE_DERelementos : par COMA elementoselementos : parpar : NAME DOSPUNTOS CADENApar : EMAIL DOSPUNTOS CADENApar : MOVIE_ID DOSPUNTOS objetopar : TEXT DOSPUNTOS CADENApar : DATE DOSPUNTOS objetopar : CADENA DOSPUNTOS objetopar : CADENA DOSPUNTOS CADENAobjeto : LLAVE_IZQ par LLAVE_DERobjeto : LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DERobjeto : LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
     
-_lr_action_items = {'html':([0,],[2,]),'$end':([1,6,],[0,-1,]),'head':([2,],[5,]),'html_end':([3,7,20,],[6,-2,-5,]),'body':([4,13,],[8,-3,]),'title':([5,],[10,]),'h1':([8,],[12,]),'head_end':([9,19,],[13,-4,]),'texto':([10,12,17,],[15,15,15,]),'title_end':([10,14,15,],[-10,19,-9,]),'p':([11,22,23,],[17,-6,17,]),'body_end':([11,16,22,23,24,],[-8,20,-6,-8,-7,]),'h1_end':([12,15,18,],[-10,-9,22,]),'p_end':([15,17,21,],[-9,-10,23,]),}
+_lr_action_items = {'LLAVE_IZQ':([0,14,16,18,33,],[2,23,23,23,35,]),'$end':([1,11,],[0,-1,]),'NAME':([2,12,23,35,],[5,5,5,5,]),'EMAIL':([2,12,23,35,],[7,7,7,7,]),'MOVIE_ID':([2,12,23,35,],[8,8,8,8,]),'TEXT':([2,12,23,35,],[9,9,9,9,]),'DATE':([2,12,23,35,],[10,10,30,30,]),'CADENA':([2,12,13,14,15,17,23,32,35,38,],[6,6,20,21,24,26,6,34,6,39,]),'LLAVE_DER':([3,4,19,20,21,22,24,25,26,27,28,31,34,36,39,40,41,],[11,-3,-2,-4,-10,-9,-5,-6,-7,-8,31,-11,36,-12,40,41,-13,]),'COMA':([4,20,21,22,24,25,26,27,31,36,41,],[12,-4,-10,-9,-5,-6,-7,-8,-11,-12,-13,]),'DOSPUNTOS':([5,6,7,8,9,10,29,30,37,],[13,14,15,16,17,18,32,33,38,]),'OID':([23,35,],[29,29,]),'NUMBERLONG':([35,],[37,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'HTML':([0,],[1,]),'CONTENT':([2,],[3,]),'HEADER':([2,],[4,]),'BODY':([4,],[7,]),'TITLE':([5,],[9,]),'H1':([8,],[11,]),'TEXTO':([10,12,17,],[14,18,21,]),'PARAGRAPH':([11,23,],[16,24,]),}
+_lr_goto_items = {'json':([0,],[1,]),'elementos':([2,12,],[3,19,]),'par':([2,12,23,35,],[4,4,28,28,]),'objeto':([14,16,18,33,],[22,25,27,27,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,15 +26,18 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> HTML","S'",1,None,None,None),
-  ('HTML -> html CONTENT html_end','HTML',3,'p_html','main2.py',5),
-  ('CONTENT -> HEADER BODY','CONTENT',2,'p_content','main2.py',10),
-  ('HEADER -> head TITLE head_end','HEADER',3,'p_header','main2.py',15),
-  ('TITLE -> title TEXTO title_end','TITLE',3,'p_title','main2.py',20),
-  ('BODY -> body H1 PARAGRAPH body_end','BODY',4,'p_body','main2.py',24),
-  ('H1 -> h1 TEXTO h1_end','H1',3,'p_h1','main2.py',29),
-  ('PARAGRAPH -> p TEXTO p_end PARAGRAPH','PARAGRAPH',4,'p_paragraph','main2.py',35),
-  ('PARAGRAPH -> <empty>','PARAGRAPH',0,'p_paragraph_2','main2.py',41),
-  ('TEXTO -> texto','TEXTO',1,'p_text','main2.py',47),
-  ('TEXTO -> <empty>','TEXTO',0,'p_text1','main2.py',52),
+  ("S' -> json","S'",1,None,None,None),
+  ('json -> LLAVE_IZQ elementos LLAVE_DER','json',3,'p_json','yacc.py',6),
+  ('elementos -> par COMA elementos','elementos',3,'p_elementos_1','yacc.py',10),
+  ('elementos -> par','elementos',1,'p_elementos_2','yacc.py',14),
+  ('par -> NAME DOSPUNTOS CADENA','par',3,'p_par_name','yacc.py',22),
+  ('par -> EMAIL DOSPUNTOS CADENA','par',3,'p_par_email','yacc.py',26),
+  ('par -> MOVIE_ID DOSPUNTOS objeto','par',3,'p_par_movie_id','yacc.py',30),
+  ('par -> TEXT DOSPUNTOS CADENA','par',3,'p_par_text','yacc.py',34),
+  ('par -> DATE DOSPUNTOS objeto','par',3,'p_par_date','yacc.py',38),
+  ('par -> CADENA DOSPUNTOS objeto','par',3,'p_par_id','yacc.py',42),
+  ('par -> CADENA DOSPUNTOS CADENA','par',3,'p_par_value','yacc.py',46),
+  ('objeto -> LLAVE_IZQ par LLAVE_DER','objeto',3,'p_objeto_1','yacc.py',50),
+  ('objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER','objeto',5,'p_objeto_2','yacc.py',54),
+  ('objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER','objeto',9,'p_objeto_3','yacc.py',58),
 ]

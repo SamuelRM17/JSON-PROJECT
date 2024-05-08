@@ -1,254 +1,442 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    ID
+
 Grammar
 
-Rule 0     S' -> HTML
-Rule 1     HTML -> html CONTENT html_end
-Rule 2     CONTENT -> HEADER BODY
-Rule 3     HEADER -> head TITLE head_end
-Rule 4     TITLE -> title TEXTO title_end
-Rule 5     BODY -> body H1 PARAGRAPH body_end
-Rule 6     H1 -> h1 TEXTO h1_end
-Rule 7     PARAGRAPH -> p TEXTO p_end PARAGRAPH
-Rule 8     PARAGRAPH -> <empty>
-Rule 9     TEXTO -> texto
-Rule 10    TEXTO -> <empty>
+Rule 0     S' -> json
+Rule 1     json -> LLAVE_IZQ elementos LLAVE_DER
+Rule 2     elementos -> par COMA elementos
+Rule 3     elementos -> par
+Rule 4     par -> NAME DOSPUNTOS CADENA
+Rule 5     par -> EMAIL DOSPUNTOS CADENA
+Rule 6     par -> MOVIE_ID DOSPUNTOS objeto
+Rule 7     par -> TEXT DOSPUNTOS CADENA
+Rule 8     par -> DATE DOSPUNTOS objeto
+Rule 9     par -> CADENA DOSPUNTOS objeto
+Rule 10    par -> CADENA DOSPUNTOS CADENA
+Rule 11    objeto -> LLAVE_IZQ par LLAVE_DER
+Rule 12    objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER
+Rule 13    objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
 
 Terminals, with rules where they appear
 
-body                 : 5
-body_end             : 5
+CADENA               : 4 5 7 9 10 10 12 13
+COMA                 : 2
+DATE                 : 8 13
+DOSPUNTOS            : 4 5 6 7 8 9 10 12 13 13
+EMAIL                : 5
+ID                   : 
+LLAVE_DER            : 1 11 12 13 13
+LLAVE_IZQ            : 1 11 12 13 13
+MOVIE_ID             : 6
+NAME                 : 4
+NUMBERLONG           : 13
+OID                  : 12
+TEXT                 : 7
 error                : 
-h1                   : 6
-h1_end               : 6
-head                 : 3
-head_end             : 3
-html                 : 1
-html_end             : 1
-p                    : 7
-p_end                : 7
-texto                : 9
-title                : 4
-title_end            : 4
 
 Nonterminals, with rules where they appear
 
-BODY                 : 2
-CONTENT              : 1
-H1                   : 5
-HEADER               : 2
-HTML                 : 0
-PARAGRAPH            : 5 7
-TEXTO                : 4 6 7
-TITLE                : 3
+elementos            : 1 2
+json                 : 0
+objeto               : 6 8 9
+par                  : 2 3 11
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . HTML
-    (1) HTML -> . html CONTENT html_end
+    (0) S' -> . json
+    (1) json -> . LLAVE_IZQ elementos LLAVE_DER
 
-    html            shift and go to state 2
+    LLAVE_IZQ       shift and go to state 2
 
-    HTML                           shift and go to state 1
+    json                           shift and go to state 1
 
 state 1
 
-    (0) S' -> HTML .
+    (0) S' -> json .
 
 
 
 state 2
 
-    (1) HTML -> html . CONTENT html_end
-    (2) CONTENT -> . HEADER BODY
-    (3) HEADER -> . head TITLE head_end
+    (1) json -> LLAVE_IZQ . elementos LLAVE_DER
+    (2) elementos -> . par COMA elementos
+    (3) elementos -> . par
+    (4) par -> . NAME DOSPUNTOS CADENA
+    (5) par -> . EMAIL DOSPUNTOS CADENA
+    (6) par -> . MOVIE_ID DOSPUNTOS objeto
+    (7) par -> . TEXT DOSPUNTOS CADENA
+    (8) par -> . DATE DOSPUNTOS objeto
+    (9) par -> . CADENA DOSPUNTOS objeto
+    (10) par -> . CADENA DOSPUNTOS CADENA
 
-    head            shift and go to state 5
+    NAME            shift and go to state 5
+    EMAIL           shift and go to state 7
+    MOVIE_ID        shift and go to state 8
+    TEXT            shift and go to state 9
+    DATE            shift and go to state 10
+    CADENA          shift and go to state 6
 
-    CONTENT                        shift and go to state 3
-    HEADER                         shift and go to state 4
+    elementos                      shift and go to state 3
+    par                            shift and go to state 4
 
 state 3
 
-    (1) HTML -> html CONTENT . html_end
+    (1) json -> LLAVE_IZQ elementos . LLAVE_DER
 
-    html_end        shift and go to state 6
+    LLAVE_DER       shift and go to state 11
 
 
 state 4
 
-    (2) CONTENT -> HEADER . BODY
-    (5) BODY -> . body H1 PARAGRAPH body_end
+    (2) elementos -> par . COMA elementos
+    (3) elementos -> par .
 
-    body            shift and go to state 8
+    COMA            shift and go to state 12
+    LLAVE_DER       reduce using rule 3 (elementos -> par .)
 
-    BODY                           shift and go to state 7
 
 state 5
 
-    (3) HEADER -> head . TITLE head_end
-    (4) TITLE -> . title TEXTO title_end
+    (4) par -> NAME . DOSPUNTOS CADENA
 
-    title           shift and go to state 10
+    DOSPUNTOS       shift and go to state 13
 
-    TITLE                          shift and go to state 9
 
 state 6
 
-    (1) HTML -> html CONTENT html_end .
+    (9) par -> CADENA . DOSPUNTOS objeto
+    (10) par -> CADENA . DOSPUNTOS CADENA
 
-    $end            reduce using rule 1 (HTML -> html CONTENT html_end .)
+    DOSPUNTOS       shift and go to state 14
 
 
 state 7
 
-    (2) CONTENT -> HEADER BODY .
+    (5) par -> EMAIL . DOSPUNTOS CADENA
 
-    html_end        reduce using rule 2 (CONTENT -> HEADER BODY .)
+    DOSPUNTOS       shift and go to state 15
 
 
 state 8
 
-    (5) BODY -> body . H1 PARAGRAPH body_end
-    (6) H1 -> . h1 TEXTO h1_end
+    (6) par -> MOVIE_ID . DOSPUNTOS objeto
 
-    h1              shift and go to state 12
+    DOSPUNTOS       shift and go to state 16
 
-    H1                             shift and go to state 11
 
 state 9
 
-    (3) HEADER -> head TITLE . head_end
+    (7) par -> TEXT . DOSPUNTOS CADENA
 
-    head_end        shift and go to state 13
+    DOSPUNTOS       shift and go to state 17
 
 
 state 10
 
-    (4) TITLE -> title . TEXTO title_end
-    (9) TEXTO -> . texto
-    (10) TEXTO -> .
+    (8) par -> DATE . DOSPUNTOS objeto
 
-    texto           shift and go to state 15
-    title_end       reduce using rule 10 (TEXTO -> .)
+    DOSPUNTOS       shift and go to state 18
 
-    TEXTO                          shift and go to state 14
 
 state 11
 
-    (5) BODY -> body H1 . PARAGRAPH body_end
-    (7) PARAGRAPH -> . p TEXTO p_end PARAGRAPH
-    (8) PARAGRAPH -> .
+    (1) json -> LLAVE_IZQ elementos LLAVE_DER .
 
-    p               shift and go to state 17
-    body_end        reduce using rule 8 (PARAGRAPH -> .)
+    $end            reduce using rule 1 (json -> LLAVE_IZQ elementos LLAVE_DER .)
 
-    PARAGRAPH                      shift and go to state 16
 
 state 12
 
-    (6) H1 -> h1 . TEXTO h1_end
-    (9) TEXTO -> . texto
-    (10) TEXTO -> .
+    (2) elementos -> par COMA . elementos
+    (2) elementos -> . par COMA elementos
+    (3) elementos -> . par
+    (4) par -> . NAME DOSPUNTOS CADENA
+    (5) par -> . EMAIL DOSPUNTOS CADENA
+    (6) par -> . MOVIE_ID DOSPUNTOS objeto
+    (7) par -> . TEXT DOSPUNTOS CADENA
+    (8) par -> . DATE DOSPUNTOS objeto
+    (9) par -> . CADENA DOSPUNTOS objeto
+    (10) par -> . CADENA DOSPUNTOS CADENA
 
-    texto           shift and go to state 15
-    h1_end          reduce using rule 10 (TEXTO -> .)
+    NAME            shift and go to state 5
+    EMAIL           shift and go to state 7
+    MOVIE_ID        shift and go to state 8
+    TEXT            shift and go to state 9
+    DATE            shift and go to state 10
+    CADENA          shift and go to state 6
 
-    TEXTO                          shift and go to state 18
+    par                            shift and go to state 4
+    elementos                      shift and go to state 19
 
 state 13
 
-    (3) HEADER -> head TITLE head_end .
+    (4) par -> NAME DOSPUNTOS . CADENA
 
-    body            reduce using rule 3 (HEADER -> head TITLE head_end .)
+    CADENA          shift and go to state 20
 
 
 state 14
 
-    (4) TITLE -> title TEXTO . title_end
+    (9) par -> CADENA DOSPUNTOS . objeto
+    (10) par -> CADENA DOSPUNTOS . CADENA
+    (11) objeto -> . LLAVE_IZQ par LLAVE_DER
+    (12) objeto -> . LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER
+    (13) objeto -> . LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
 
-    title_end       shift and go to state 19
+    CADENA          shift and go to state 21
+    LLAVE_IZQ       shift and go to state 23
 
+    objeto                         shift and go to state 22
 
 state 15
 
-    (9) TEXTO -> texto .
+    (5) par -> EMAIL DOSPUNTOS . CADENA
 
-    title_end       reduce using rule 9 (TEXTO -> texto .)
-    h1_end          reduce using rule 9 (TEXTO -> texto .)
-    p_end           reduce using rule 9 (TEXTO -> texto .)
+    CADENA          shift and go to state 24
 
 
 state 16
 
-    (5) BODY -> body H1 PARAGRAPH . body_end
+    (6) par -> MOVIE_ID DOSPUNTOS . objeto
+    (11) objeto -> . LLAVE_IZQ par LLAVE_DER
+    (12) objeto -> . LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER
+    (13) objeto -> . LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
 
-    body_end        shift and go to state 20
+    LLAVE_IZQ       shift and go to state 23
 
+    objeto                         shift and go to state 25
 
 state 17
 
-    (7) PARAGRAPH -> p . TEXTO p_end PARAGRAPH
-    (9) TEXTO -> . texto
-    (10) TEXTO -> .
+    (7) par -> TEXT DOSPUNTOS . CADENA
 
-    texto           shift and go to state 15
-    p_end           reduce using rule 10 (TEXTO -> .)
+    CADENA          shift and go to state 26
 
-    TEXTO                          shift and go to state 21
 
 state 18
 
-    (6) H1 -> h1 TEXTO . h1_end
+    (8) par -> DATE DOSPUNTOS . objeto
+    (11) objeto -> . LLAVE_IZQ par LLAVE_DER
+    (12) objeto -> . LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER
+    (13) objeto -> . LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
 
-    h1_end          shift and go to state 22
+    LLAVE_IZQ       shift and go to state 23
 
+    objeto                         shift and go to state 27
 
 state 19
 
-    (4) TITLE -> title TEXTO title_end .
+    (2) elementos -> par COMA elementos .
 
-    head_end        reduce using rule 4 (TITLE -> title TEXTO title_end .)
+    LLAVE_DER       reduce using rule 2 (elementos -> par COMA elementos .)
 
 
 state 20
 
-    (5) BODY -> body H1 PARAGRAPH body_end .
+    (4) par -> NAME DOSPUNTOS CADENA .
 
-    html_end        reduce using rule 5 (BODY -> body H1 PARAGRAPH body_end .)
+    COMA            reduce using rule 4 (par -> NAME DOSPUNTOS CADENA .)
+    LLAVE_DER       reduce using rule 4 (par -> NAME DOSPUNTOS CADENA .)
 
 
 state 21
 
-    (7) PARAGRAPH -> p TEXTO . p_end PARAGRAPH
+    (10) par -> CADENA DOSPUNTOS CADENA .
 
-    p_end           shift and go to state 23
+    COMA            reduce using rule 10 (par -> CADENA DOSPUNTOS CADENA .)
+    LLAVE_DER       reduce using rule 10 (par -> CADENA DOSPUNTOS CADENA .)
 
 
 state 22
 
-    (6) H1 -> h1 TEXTO h1_end .
+    (9) par -> CADENA DOSPUNTOS objeto .
 
-    p               reduce using rule 6 (H1 -> h1 TEXTO h1_end .)
-    body_end        reduce using rule 6 (H1 -> h1 TEXTO h1_end .)
+    COMA            reduce using rule 9 (par -> CADENA DOSPUNTOS objeto .)
+    LLAVE_DER       reduce using rule 9 (par -> CADENA DOSPUNTOS objeto .)
 
 
 state 23
 
-    (7) PARAGRAPH -> p TEXTO p_end . PARAGRAPH
-    (7) PARAGRAPH -> . p TEXTO p_end PARAGRAPH
-    (8) PARAGRAPH -> .
+    (11) objeto -> LLAVE_IZQ . par LLAVE_DER
+    (12) objeto -> LLAVE_IZQ . OID DOSPUNTOS CADENA LLAVE_DER
+    (13) objeto -> LLAVE_IZQ . DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+    (4) par -> . NAME DOSPUNTOS CADENA
+    (5) par -> . EMAIL DOSPUNTOS CADENA
+    (6) par -> . MOVIE_ID DOSPUNTOS objeto
+    (7) par -> . TEXT DOSPUNTOS CADENA
+    (8) par -> . DATE DOSPUNTOS objeto
+    (9) par -> . CADENA DOSPUNTOS objeto
+    (10) par -> . CADENA DOSPUNTOS CADENA
 
-    p               shift and go to state 17
-    body_end        reduce using rule 8 (PARAGRAPH -> .)
+    OID             shift and go to state 29
+    DATE            shift and go to state 30
+    NAME            shift and go to state 5
+    EMAIL           shift and go to state 7
+    MOVIE_ID        shift and go to state 8
+    TEXT            shift and go to state 9
+    CADENA          shift and go to state 6
 
-    PARAGRAPH                      shift and go to state 24
+    par                            shift and go to state 28
 
 state 24
 
-    (7) PARAGRAPH -> p TEXTO p_end PARAGRAPH .
+    (5) par -> EMAIL DOSPUNTOS CADENA .
 
-    body_end        reduce using rule 7 (PARAGRAPH -> p TEXTO p_end PARAGRAPH .)
+    COMA            reduce using rule 5 (par -> EMAIL DOSPUNTOS CADENA .)
+    LLAVE_DER       reduce using rule 5 (par -> EMAIL DOSPUNTOS CADENA .)
+
+
+state 25
+
+    (6) par -> MOVIE_ID DOSPUNTOS objeto .
+
+    COMA            reduce using rule 6 (par -> MOVIE_ID DOSPUNTOS objeto .)
+    LLAVE_DER       reduce using rule 6 (par -> MOVIE_ID DOSPUNTOS objeto .)
+
+
+state 26
+
+    (7) par -> TEXT DOSPUNTOS CADENA .
+
+    COMA            reduce using rule 7 (par -> TEXT DOSPUNTOS CADENA .)
+    LLAVE_DER       reduce using rule 7 (par -> TEXT DOSPUNTOS CADENA .)
+
+
+state 27
+
+    (8) par -> DATE DOSPUNTOS objeto .
+
+    COMA            reduce using rule 8 (par -> DATE DOSPUNTOS objeto .)
+    LLAVE_DER       reduce using rule 8 (par -> DATE DOSPUNTOS objeto .)
+
+
+state 28
+
+    (11) objeto -> LLAVE_IZQ par . LLAVE_DER
+
+    LLAVE_DER       shift and go to state 31
+
+
+state 29
+
+    (12) objeto -> LLAVE_IZQ OID . DOSPUNTOS CADENA LLAVE_DER
+
+    DOSPUNTOS       shift and go to state 32
+
+
+state 30
+
+    (13) objeto -> LLAVE_IZQ DATE . DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+    (8) par -> DATE . DOSPUNTOS objeto
+
+    DOSPUNTOS       shift and go to state 33
+
+
+state 31
+
+    (11) objeto -> LLAVE_IZQ par LLAVE_DER .
+
+    COMA            reduce using rule 11 (objeto -> LLAVE_IZQ par LLAVE_DER .)
+    LLAVE_DER       reduce using rule 11 (objeto -> LLAVE_IZQ par LLAVE_DER .)
+
+
+state 32
+
+    (12) objeto -> LLAVE_IZQ OID DOSPUNTOS . CADENA LLAVE_DER
+
+    CADENA          shift and go to state 34
+
+
+state 33
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS . LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+    (8) par -> DATE DOSPUNTOS . objeto
+    (11) objeto -> . LLAVE_IZQ par LLAVE_DER
+    (12) objeto -> . LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER
+    (13) objeto -> . LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+
+    LLAVE_IZQ       shift and go to state 35
+
+    objeto                         shift and go to state 27
+
+state 34
+
+    (12) objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA . LLAVE_DER
+
+    LLAVE_DER       shift and go to state 36
+
+
+state 35
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ . NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+    (11) objeto -> LLAVE_IZQ . par LLAVE_DER
+    (12) objeto -> LLAVE_IZQ . OID DOSPUNTOS CADENA LLAVE_DER
+    (13) objeto -> LLAVE_IZQ . DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+    (4) par -> . NAME DOSPUNTOS CADENA
+    (5) par -> . EMAIL DOSPUNTOS CADENA
+    (6) par -> . MOVIE_ID DOSPUNTOS objeto
+    (7) par -> . TEXT DOSPUNTOS CADENA
+    (8) par -> . DATE DOSPUNTOS objeto
+    (9) par -> . CADENA DOSPUNTOS objeto
+    (10) par -> . CADENA DOSPUNTOS CADENA
+
+    NUMBERLONG      shift and go to state 37
+    OID             shift and go to state 29
+    DATE            shift and go to state 30
+    NAME            shift and go to state 5
+    EMAIL           shift and go to state 7
+    MOVIE_ID        shift and go to state 8
+    TEXT            shift and go to state 9
+    CADENA          shift and go to state 6
+
+    par                            shift and go to state 28
+
+state 36
+
+    (12) objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER .
+
+    COMA            reduce using rule 12 (objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER .)
+    LLAVE_DER       reduce using rule 12 (objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER .)
+
+
+state 37
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG . DOSPUNTOS CADENA LLAVE_DER LLAVE_DER
+
+    DOSPUNTOS       shift and go to state 38
+
+
+state 38
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS . CADENA LLAVE_DER LLAVE_DER
+
+    CADENA          shift and go to state 39
+
+
+state 39
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA . LLAVE_DER LLAVE_DER
+
+    LLAVE_DER       shift and go to state 40
+
+
+state 40
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER . LLAVE_DER
+
+    LLAVE_DER       shift and go to state 41
+
+
+state 41
+
+    (13) objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER .
+
+    COMA            reduce using rule 13 (objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER .)
+    LLAVE_DER       reduce using rule 13 (objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER .)
 
