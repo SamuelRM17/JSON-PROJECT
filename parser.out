@@ -1,0 +1,254 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> HTML
+Rule 1     HTML -> html CONTENT html_end
+Rule 2     CONTENT -> HEADER BODY
+Rule 3     HEADER -> head TITLE head_end
+Rule 4     TITLE -> title TEXTO title_end
+Rule 5     BODY -> body H1 PARAGRAPH body_end
+Rule 6     H1 -> h1 TEXTO h1_end
+Rule 7     PARAGRAPH -> p TEXTO p_end PARAGRAPH
+Rule 8     PARAGRAPH -> <empty>
+Rule 9     TEXTO -> texto
+Rule 10    TEXTO -> <empty>
+
+Terminals, with rules where they appear
+
+body                 : 5
+body_end             : 5
+error                : 
+h1                   : 6
+h1_end               : 6
+head                 : 3
+head_end             : 3
+html                 : 1
+html_end             : 1
+p                    : 7
+p_end                : 7
+texto                : 9
+title                : 4
+title_end            : 4
+
+Nonterminals, with rules where they appear
+
+BODY                 : 2
+CONTENT              : 1
+H1                   : 5
+HEADER               : 2
+HTML                 : 0
+PARAGRAPH            : 5 7
+TEXTO                : 4 6 7
+TITLE                : 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . HTML
+    (1) HTML -> . html CONTENT html_end
+
+    html            shift and go to state 2
+
+    HTML                           shift and go to state 1
+
+state 1
+
+    (0) S' -> HTML .
+
+
+
+state 2
+
+    (1) HTML -> html . CONTENT html_end
+    (2) CONTENT -> . HEADER BODY
+    (3) HEADER -> . head TITLE head_end
+
+    head            shift and go to state 5
+
+    CONTENT                        shift and go to state 3
+    HEADER                         shift and go to state 4
+
+state 3
+
+    (1) HTML -> html CONTENT . html_end
+
+    html_end        shift and go to state 6
+
+
+state 4
+
+    (2) CONTENT -> HEADER . BODY
+    (5) BODY -> . body H1 PARAGRAPH body_end
+
+    body            shift and go to state 8
+
+    BODY                           shift and go to state 7
+
+state 5
+
+    (3) HEADER -> head . TITLE head_end
+    (4) TITLE -> . title TEXTO title_end
+
+    title           shift and go to state 10
+
+    TITLE                          shift and go to state 9
+
+state 6
+
+    (1) HTML -> html CONTENT html_end .
+
+    $end            reduce using rule 1 (HTML -> html CONTENT html_end .)
+
+
+state 7
+
+    (2) CONTENT -> HEADER BODY .
+
+    html_end        reduce using rule 2 (CONTENT -> HEADER BODY .)
+
+
+state 8
+
+    (5) BODY -> body . H1 PARAGRAPH body_end
+    (6) H1 -> . h1 TEXTO h1_end
+
+    h1              shift and go to state 12
+
+    H1                             shift and go to state 11
+
+state 9
+
+    (3) HEADER -> head TITLE . head_end
+
+    head_end        shift and go to state 13
+
+
+state 10
+
+    (4) TITLE -> title . TEXTO title_end
+    (9) TEXTO -> . texto
+    (10) TEXTO -> .
+
+    texto           shift and go to state 15
+    title_end       reduce using rule 10 (TEXTO -> .)
+
+    TEXTO                          shift and go to state 14
+
+state 11
+
+    (5) BODY -> body H1 . PARAGRAPH body_end
+    (7) PARAGRAPH -> . p TEXTO p_end PARAGRAPH
+    (8) PARAGRAPH -> .
+
+    p               shift and go to state 17
+    body_end        reduce using rule 8 (PARAGRAPH -> .)
+
+    PARAGRAPH                      shift and go to state 16
+
+state 12
+
+    (6) H1 -> h1 . TEXTO h1_end
+    (9) TEXTO -> . texto
+    (10) TEXTO -> .
+
+    texto           shift and go to state 15
+    h1_end          reduce using rule 10 (TEXTO -> .)
+
+    TEXTO                          shift and go to state 18
+
+state 13
+
+    (3) HEADER -> head TITLE head_end .
+
+    body            reduce using rule 3 (HEADER -> head TITLE head_end .)
+
+
+state 14
+
+    (4) TITLE -> title TEXTO . title_end
+
+    title_end       shift and go to state 19
+
+
+state 15
+
+    (9) TEXTO -> texto .
+
+    title_end       reduce using rule 9 (TEXTO -> texto .)
+    h1_end          reduce using rule 9 (TEXTO -> texto .)
+    p_end           reduce using rule 9 (TEXTO -> texto .)
+
+
+state 16
+
+    (5) BODY -> body H1 PARAGRAPH . body_end
+
+    body_end        shift and go to state 20
+
+
+state 17
+
+    (7) PARAGRAPH -> p . TEXTO p_end PARAGRAPH
+    (9) TEXTO -> . texto
+    (10) TEXTO -> .
+
+    texto           shift and go to state 15
+    p_end           reduce using rule 10 (TEXTO -> .)
+
+    TEXTO                          shift and go to state 21
+
+state 18
+
+    (6) H1 -> h1 TEXTO . h1_end
+
+    h1_end          shift and go to state 22
+
+
+state 19
+
+    (4) TITLE -> title TEXTO title_end .
+
+    head_end        reduce using rule 4 (TITLE -> title TEXTO title_end .)
+
+
+state 20
+
+    (5) BODY -> body H1 PARAGRAPH body_end .
+
+    html_end        reduce using rule 5 (BODY -> body H1 PARAGRAPH body_end .)
+
+
+state 21
+
+    (7) PARAGRAPH -> p TEXTO . p_end PARAGRAPH
+
+    p_end           shift and go to state 23
+
+
+state 22
+
+    (6) H1 -> h1 TEXTO h1_end .
+
+    p               reduce using rule 6 (H1 -> h1 TEXTO h1_end .)
+    body_end        reduce using rule 6 (H1 -> h1 TEXTO h1_end .)
+
+
+state 23
+
+    (7) PARAGRAPH -> p TEXTO p_end . PARAGRAPH
+    (7) PARAGRAPH -> . p TEXTO p_end PARAGRAPH
+    (8) PARAGRAPH -> .
+
+    p               shift and go to state 17
+    body_end        reduce using rule 8 (PARAGRAPH -> .)
+
+    PARAGRAPH                      shift and go to state 24
+
+state 24
+
+    (7) PARAGRAPH -> p TEXTO p_end PARAGRAPH .
+
+    body_end        reduce using rule 7 (PARAGRAPH -> p TEXTO p_end PARAGRAPH .)
+
