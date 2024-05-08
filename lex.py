@@ -30,25 +30,4 @@ def t_error(t):
     print(f"Illegal character: '{t.value[0]}'")
     t.lexer.skip(1)
 
-
-#ignoramos los tabs
-t_ignore = '\t\n'
-
-#cualquier token que no esté en los tokens definidos
-def t_error(t):
-    print(f"Illegal character: '{t.value[0]}'")
-    t.lexer.skip(1)
-
 lexer = lex.lex()
-
-
-# while input_str != '':
-#     print('Para terminar introduce ENTER --- ')
-#     input_str = input('Entrada a validar sintácticamente: ')
-
-#     if input_str != '':
-#         lexer.input(input_str)
-        
-#         for tok in lexer:
-#             print(tok)
-
