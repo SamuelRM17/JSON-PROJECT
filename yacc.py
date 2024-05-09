@@ -1,4 +1,5 @@
 import inspect
+import json
 import ply.yacc as yacc
 import ply.lex as lex  # Importa lex
 from lex import tokens
@@ -55,4 +56,36 @@ for tok in lex.lexer:
     print(tok)
 
 resultado = parser.parse(contenido_archivo)
-print(resultado)
+#print(resultado)
+
+#Transformamos el resultado a un diccionario
+data = json.loads(resultado)
+print(data)
+
+
+campos = [
+    "_id",
+    "name",
+    "email",
+    "movie_id",
+    "text",
+    "date"
+]
+
+with open('output.csv', 'w', newline='') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=campos)
+
+    writer.writeheader()
+
+    for i in data:
+        flat_record = {
+            "_id": i["_id"]["$oid"],
+            "name": i["name"],
+            "email": i["email"],
+            "movie_id": i["movie_id"]["$oid"],
+            "text": i["text"],
+            "date": i["date"]["$date"]["$numberLong"]
+            
+        }
+        writer.writerow(flat_record)
+
