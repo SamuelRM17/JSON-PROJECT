@@ -6,60 +6,40 @@ import csv
 import sys
 
 def p_json(p):
-    'json : LLAVE_IZQ elementos LLAVE_DER'
-    p[0] = p[1] + p[2] + p[3]
-
+    'json : CORCHETE_IZQ elementos CORCHETE_DER'
+    p[0]= p[1] + p[2] + p[3]
+#Esta es de la recursiva
 def p_elementos_1(p):
-    'elementos : par COMA elementos'
-    p[0] = p[1] + p[2] + p[3]
-
+    'elementos : LLAVE_IZQ p_ID COMA p_name COMA p_email COMA p_movie_id COMA p_text COMA p_date LLAVE_DER COMA elementos'
+    p[0] = p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7] + p[8] + p[9] + p[10] + p[11] + p[12] + p[13] + p[14] + p[15]
+#esta incluye nomas una
 def p_elementos_2(p):
-    'elementos : par'
-    p[0] = p[1]
+    'elementos : LLAVE_IZQ p_ID COMA p_name COMA p_email COMA p_movie_id COMA p_text COMA p_date LLAVE_DER'
+    p[0] = p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7] + p[8] + p[9] + p[10] + p[11] + p[12] + p[13]
 
-def p_par_id(p):
-    'par : ID DOSPUNTOS objeto'
-    p[0] = p[1] + p[2] + p[3]
+def p_ID(p):
+    'p_ID : ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER' #POSIBLE CORRECCION DE CADENA A OTRA NUEVA
+    p[0]= p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7]
 
-def p_par_name(p):
-    'par : NAME DOSPUNTOS CADENA'
-    p[0] = p[1] + p[2] + p[3]
+def p_name(p):
+    'p_name : NAME DOSPUNTOS CADENA'
+    p[0]= p[1] + p[2] + p[3]
 
-def p_par_email(p):
-    'par : EMAIL DOSPUNTOS CADENA'
-    p[0] = p[1] + p[2] + p[3]
+def p_email(p):
+    'p_email : EMAIL DOSPUNTOS CADENA'
+    p[0]= p[1] + p[2] + p[3]
 
-def p_par_movie_id(p):
-    'par : MOVIE_ID DOSPUNTOS objeto'
-    p[0] = p[1] + p[2] + p[3]
+def p_movie_id(p):
+    'p_movie_id : MOVIE_ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER'
+    p[0]= p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7]
 
-def p_par_text(p):
-    'par : TEXT DOSPUNTOS CADENA'
-    p[0] = p[1] + p[2] + p[3]
+def p_text(p):
+    'p_text : TEXT DOSPUNTOS CADENA'
+    p[0]= p[1] + p[2] + p[3]
 
-def p_par_date(p):
-    'par : DATE DOSPUNTOS objeto'
-    p[0] = p[1] + p[2] + p[3]
-
-def p_par_id(p):
-    'par : CADENA DOSPUNTOS objeto'
-    p[0] = p[1] + p[2] + p[3]
-
-def p_par_value(p):
-    'par : CADENA DOSPUNTOS CADENA'
-    p[0] = p[1] + p[2] + p[3]
-
-def p_objeto_1(p):
-    'objeto : LLAVE_IZQ par LLAVE_DER'
-    p[0] = p[1] + p[2] + p[3]
-
-def p_objeto_2(p):
-    'objeto : LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER'
-    p[0] = p[1] + p[2] + p[3] + p[4] + p[5]
-
-def p_objeto_3(p):
-    'objeto : LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
-    p[0] = p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7] + p[8] + p[9]
+def p_date(p):
+    'p_date : DATE DOSPUNTOS LLAVE_IZQ SDATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
+    p[0] = p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7] + p[8] + p[9] + p[10] + p[11]
 
 def p_error(p):
     print("Error de sintaxis en '%s'" % p.value)
@@ -69,29 +49,27 @@ parser = yacc.yacc()
 with open('/Users/samuelromero/Desktop/LexYaccMiniProject/JSON/JSON-PROJECT/test.json', 'r') as file:
     contenido_archivo = file.read()
 
-# Asegúrate de que lex.lexer está definido correctamente en el módulo lex
 lex.lexer.input(contenido_archivo)
 
 for tok in lex.lexer:
     print(tok)
 
-# Analiza la entrada
 resultado = parser.parse(contenido_archivo)
 print(resultado)
 
-rules = []
-for name, obj in inspect.getmembers(sys.modules[__name__]):
-    if inspect.isfunction(obj) and name.startswith('p_'):
-        docstring = inspect.getdoc(obj)
-        if docstring:
-            rule, definition = docstring.split(' : ')
-            rules.append({'rule': rule, 'definition': definition})
+# rules = []
+# for name, obj in inspect.getmembers(sys.modules[__name__]):
+#     if inspect.isfunction(obj) and name.startswith('p_'):
+#         docstring = inspect.getdoc(obj)
+#         if docstring:
+#             rule, definition = docstring.split(' : ')
+#             rules.append({'rule': rule, 'definition': definition})
 
 
-with open('grammar_rules.csv', 'w', newline='') as csvfile:
-    fieldnames = ['rule', 'definition']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+# with open('grammar_rules.csv', 'w', newline='') as csvfile:
+#     fieldnames = ['rule', 'definition']
+#     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-    writer.writeheader()
-    for rule in rules:
-        writer.writerow(rule)
+#     writer.writeheader()
+#     for rule in rules:
+#         writer.writerow(rule)

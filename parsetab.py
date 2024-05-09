@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CADENA COMA DATE DOSPUNTOS EMAIL ID LLAVE_DER LLAVE_IZQ MOVIE_ID NAME NUMBERLONG OID TEXTjson : LLAVE_IZQ elementos LLAVE_DERelementos : par COMA elementoselementos : parpar : NAME DOSPUNTOS CADENApar : EMAIL DOSPUNTOS CADENApar : MOVIE_ID DOSPUNTOS objetopar : TEXT DOSPUNTOS CADENApar : DATE DOSPUNTOS objetopar : CADENA DOSPUNTOS objetopar : CADENA DOSPUNTOS CADENAobjeto : LLAVE_IZQ par LLAVE_DERobjeto : LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DERobjeto : LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
+_lr_signature = 'CADENA COMA CORCHETE_DER CORCHETE_IZQ DATE DOSPUNTOS EMAIL ID LLAVE_DER LLAVE_IZQ MOVIE_ID NAME NUMBERLONG OID SDATE TEXTjson : CORCHETE_IZQ elementos CORCHETE_DERelementos : LLAVE_IZQ p_ID COMA p_name COMA p_email COMA p_movie_id COMA p_text COMA p_date LLAVE_DER COMA elementoselementos : LLAVE_IZQ p_ID COMA p_name COMA p_email COMA p_movie_id COMA p_text COMA p_date LLAVE_DERp_ID : ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DERp_name : NAME DOSPUNTOS CADENAp_email : EMAIL DOSPUNTOS CADENAp_movie_id : MOVIE_ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DERp_text : TEXT DOSPUNTOS CADENAp_date : DATE DOSPUNTOS LLAVE_IZQ SDATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
     
-_lr_action_items = {'LLAVE_IZQ':([0,14,16,18,33,],[2,23,23,23,35,]),'$end':([1,11,],[0,-1,]),'NAME':([2,12,23,35,],[5,5,5,5,]),'EMAIL':([2,12,23,35,],[7,7,7,7,]),'MOVIE_ID':([2,12,23,35,],[8,8,8,8,]),'TEXT':([2,12,23,35,],[9,9,9,9,]),'DATE':([2,12,23,35,],[10,10,30,30,]),'CADENA':([2,12,13,14,15,17,23,32,35,38,],[6,6,20,21,24,26,6,34,6,39,]),'LLAVE_DER':([3,4,19,20,21,22,24,25,26,27,28,31,34,36,39,40,41,],[11,-3,-2,-4,-10,-9,-5,-6,-7,-8,31,-11,36,-12,40,41,-13,]),'COMA':([4,20,21,22,24,25,26,27,31,36,41,],[12,-4,-10,-9,-5,-6,-7,-8,-11,-12,-13,]),'DOSPUNTOS':([5,6,7,8,9,10,29,30,37,],[13,14,15,16,17,18,32,33,38,]),'OID':([23,35,],[29,29,]),'NUMBERLONG':([35,],[37,]),}
+_lr_action_items = {'CORCHETE_IZQ':([0,],[2,]),'$end':([1,5,],[0,-1,]),'LLAVE_IZQ':([2,9,28,40,42,47,],[4,12,31,43,4,48,]),'CORCHETE_DER':([3,39,45,],[5,-3,-2,]),'ID':([4,],[7,]),'COMA':([6,10,16,18,23,25,26,29,37,39,44,],[8,13,20,-5,27,-6,-4,32,-8,42,-7,]),'DOSPUNTOS':([7,11,15,17,24,30,34,36,46,49,],[9,14,19,21,28,33,38,40,47,50,]),'NAME':([8,],[11,]),'OID':([12,31,],[15,34,]),'EMAIL':([13,],[17,]),'CADENA':([14,19,21,33,38,50,],[18,22,25,37,41,51,]),'MOVIE_ID':([20,],[24,]),'LLAVE_DER':([22,35,41,51,52,53,],[26,39,44,52,53,-9,]),'TEXT':([27,],[30,]),'DATE':([32,],[36,]),'SDATE':([43,],[46,]),'NUMBERLONG':([48,],[49,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'json':([0,],[1,]),'elementos':([2,12,],[3,19,]),'par':([2,12,23,35,],[4,4,28,28,]),'objeto':([14,16,18,33,],[22,25,27,27,]),}
+_lr_goto_items = {'json':([0,],[1,]),'elementos':([2,42,],[3,45,]),'p_ID':([4,],[6,]),'p_name':([8,],[10,]),'p_email':([13,],[16,]),'p_movie_id':([20,],[23,]),'p_text':([27,],[29,]),'p_date':([32,],[35,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,17 +27,13 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> json","S'",1,None,None,None),
-  ('json -> LLAVE_IZQ elementos LLAVE_DER','json',3,'p_json','yacc.py',6),
-  ('elementos -> par COMA elementos','elementos',3,'p_elementos_1','yacc.py',10),
-  ('elementos -> par','elementos',1,'p_elementos_2','yacc.py',14),
-  ('par -> NAME DOSPUNTOS CADENA','par',3,'p_par_name','yacc.py',22),
-  ('par -> EMAIL DOSPUNTOS CADENA','par',3,'p_par_email','yacc.py',26),
-  ('par -> MOVIE_ID DOSPUNTOS objeto','par',3,'p_par_movie_id','yacc.py',30),
-  ('par -> TEXT DOSPUNTOS CADENA','par',3,'p_par_text','yacc.py',34),
-  ('par -> DATE DOSPUNTOS objeto','par',3,'p_par_date','yacc.py',38),
-  ('par -> CADENA DOSPUNTOS objeto','par',3,'p_par_id','yacc.py',42),
-  ('par -> CADENA DOSPUNTOS CADENA','par',3,'p_par_value','yacc.py',46),
-  ('objeto -> LLAVE_IZQ par LLAVE_DER','objeto',3,'p_objeto_1','yacc.py',50),
-  ('objeto -> LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER','objeto',5,'p_objeto_2','yacc.py',54),
-  ('objeto -> LLAVE_IZQ DATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER','objeto',9,'p_objeto_3','yacc.py',58),
+  ('json -> CORCHETE_IZQ elementos CORCHETE_DER','json',3,'p_json','yacc.py',9),
+  ('elementos -> LLAVE_IZQ p_ID COMA p_name COMA p_email COMA p_movie_id COMA p_text COMA p_date LLAVE_DER COMA elementos','elementos',15,'p_elementos_1','yacc.py',13),
+  ('elementos -> LLAVE_IZQ p_ID COMA p_name COMA p_email COMA p_movie_id COMA p_text COMA p_date LLAVE_DER','elementos',13,'p_elementos_2','yacc.py',17),
+  ('p_ID -> ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER','p_ID',7,'p_ID','yacc.py',21),
+  ('p_name -> NAME DOSPUNTOS CADENA','p_name',3,'p_name','yacc.py',25),
+  ('p_email -> EMAIL DOSPUNTOS CADENA','p_email',3,'p_email','yacc.py',29),
+  ('p_movie_id -> MOVIE_ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER','p_movie_id',7,'p_movie_id','yacc.py',33),
+  ('p_text -> TEXT DOSPUNTOS CADENA','p_text',3,'p_text','yacc.py',37),
+  ('p_date -> DATE DOSPUNTOS LLAVE_IZQ SDATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER','p_date',11,'p_date','yacc.py',41),
 ]

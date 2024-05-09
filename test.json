@@ -1,16 +1,203 @@
-{
-    "_id": {
-      "$oid": "5a9427648b0beebeb69579cc"
+[
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579cc"},
+      "name": "Andrea Le",
+      "email": "andrea_le@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd418c"},
+      "text": "this is a comentary for the film",
+      "date": {"$date": {"$numberLong": "1332804016000"}}
     },
-    "name": "Andrea Le",
-    "email": "andrea_le@fakegmail.com",
-    "movie_id": {
-      "$oid": "573a1390f29313caabcd418c"
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579cd"},
+      "name": "James Smith",
+      "email": "james_smith@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd419c"},
+      "text": "Great plot twist at the end!",
+      "date": {"$date": {"$numberLong": "1546387200000"}}
     },
-    "text": "this is a comentary for the film",
-    "date": {
-      "$date": {
-        "$numberLong": "1332804016000"
-      }
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579ce"},
+      "name": "Emma Johnson",
+      "email": "emma_johnson@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd420c"},
+      "text": "Loved the cinematography",
+      "date": {"$date": {"$numberLong": "1590182400000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579cf"},
+      "name": "Isabel Ruiz",
+      "email": "isabel_ruiz@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd421c"},
+      "text": "Not what I expected, but still good",
+      "date": {"$date": {"$numberLong": "1588291200000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d0"},
+      "name": "John Doe",
+      "email": "john_doe@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd422c"},
+      "text": "Could have been better",
+      "date": {"$date": {"$numberLong": "1609459200000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d1"},
+      "name": "Maria Gonzales",
+      "email": "maria_gonzales@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd423c"},
+      "text": "My favorite movie this year!",
+      "date": {"$date": {"$numberLong": "1617235200000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d2"},
+      "name": "David Lee",
+      "email": "david_lee@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd424c"},
+      "text": "Solid performances from the cast",
+      "date": {"$date": {"$numberLong": "1625097600000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d3"},
+      "name": "Lily Evans",
+      "email": "lily_evans@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd425c"},
+      "text": "Too long and dragged out",
+      "date": {"$date": {"$numberLong": "1635724800000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d4"},
+      "name": "Robert Brown",
+      "email": "robert_brown@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd426c"},
+      "text": "Amazing visual effects",
+      "date": {"$date": {"$numberLong": "1651363200000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d5"},
+      "name": "Sophia Wilson",
+      "email": "sophia_wilson@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd427c"},
+      "text": "Soundtrack was incredible",
+      "date": {"$date": {"$numberLong": "1661990400000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d6"},
+      "name": "Mike Harris",
+      "email": "mike_harris@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd428c"},
+      "text": "I fell asleep halfway through",
+      "date": {"$date": {"$numberLong": "1672617600000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d7"},
+      "name": "Laura Martinez",
+      "email": "laura_martinez@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd429c"},
+      "text": "Heartwarming story",
+      "date": {"$date": {"$numberLong": "1683244800000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d8"},
+      "name": "Oliver Taylor",
+      "email": "oliver_taylor@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd430c"},
+      "text": "The director did a fantastic job",
+      "date": {"$date": {"$numberLong": "1693881600000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579d9"},
+      "name": "Chloe Wilson",
+      "email": "chloe_wilson@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd431c"},
+      "text": "Plot was predictable",
+      "date": {"$date": {"$numberLong": "1704508800000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579da"},
+      "name": "Ethan Johnson",
+      "email": "ethan_johnson@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd432c"},
+      "text": "The lead actor was superb",
+      "date": {"$date": {"$numberLong": "1715136000000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579db"},
+      "name": "Grace Davis",
+      "email": "grace_davis@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd433c"},
+      "text": "Lacking depth in the storyline",
+      "date": {"$date": {"$numberLong": "1725772800000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579dc"},
+      "name": "Jack Miller",
+      "email": "jack_miller@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd434c"},
+      "text": "I would watch it again!",
+      "date": {"$date": {"$numberLong": "1736486400000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579dd"},
+      "name": "Ava Lee",
+      "email": "ava_lee@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd435c"},
+      "text": "Great for a movie night",
+      "date": {"$date": {"$numberLong": "1747123200000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579de"},
+      "name": "Noah Martinez",
+      "email": "noah_martinez@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd436c"},
+      "text": "Too scary for me",
+      "date": {"$date": {"$numberLong": "1757760000000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579df"},
+      "name": "Isabella Smith",
+      "email": "isabella_smith@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd437c"},
+      "text": "Emotional rollercoaster",
+      "date": {"$date": {"$numberLong": "1779033600000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579e0"},
+      "name": "William Johnson",
+      "email": "william_johnson@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd438c"},
+      "text": "Captivating storyline",
+      "date": {"$date": {"$numberLong": "1768396800000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579e1"},
+      "name": "Sophie Brown",
+      "email": "sophie_brown@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd439c"},
+      "text": "Emotional rollercoaster",
+      "date": {"$date": {"$numberLong": "1779033600000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579e2"},
+      "name": "Mia Taylor",
+      "email": "mia_taylor@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd440c"},
+      "text": "Dialogue felt natural",
+      "date": {"$date": {"$numberLong": "1789670400000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579e3"},
+      "name": "Elijah Wilson",
+      "email": "elijah_wilson@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd441c"},
+      "text": "Incredible character development",
+      "date": {"$date": {"$numberLong": "1800307200000"}}
+    },
+    {
+      "_id": {"$oid": "5a9427648b0beebeb69579e4"},
+      "name": "Aiden Martinez",
+      "email": "aiden_martinez@fakegmail.com",
+      "movie_id": {"$oid": "573a1390f29313caabcd442c"},
+      "text": "Suspense kept me on the edge of my seat",
+      "date": {"$date": {"$numberLong": "1810944000000"}}
     }
-  }
+  ]
+  

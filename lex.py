@@ -1,6 +1,8 @@
 import ply.lex as lex
 
 tokens = (
+    'CORCHETE_IZQ',
+    'CORCHETE_DER',
     'LLAVE_IZQ',
     'LLAVE_DER',
     'COMA',
@@ -13,22 +15,54 @@ tokens = (
     'MOVIE_ID',
     'TEXT',
     'DATE',
-    'NUMBERLONG'
+    'NUMBERLONG',
+    'SDATE'
 )
 
+
+t_CORCHETE_IZQ = r'\['
+t_CORCHETE_DER = r'\]'
 t_LLAVE_IZQ = r'\{'
 t_LLAVE_DER = r'\}'
 t_COMA = r','
 t_DOSPUNTOS = r':'
 t_CADENA = r'"([^"\\]|\\.)*"'
-t_ID = r'"\_id"'
-t_OID = r'"\$oid"'
-t_NAME = r'"name"'
-t_EMAIL = r'"email"'
-t_MOVIE_ID = r'"movie_id"'
-t_TEXT = r'"text"'
-t_DATE = r'"date"'
-t_NUMBERLONG = r'"\$numberLong"'
+
+
+
+def t_ID(t):
+    r'"\_id"'
+    return t
+
+def t_OID(t):
+    r'"\$oid"'
+    return t
+
+def t_NAME(t):
+    r'"name"'
+    return t
+
+def t_EMAIL(t):
+    r'"email"'
+    return t
+
+def t_MOVIE_ID(t):
+    r'"movie_id"'
+    return t
+
+def t_TEXT(t):
+    r'"text"'
+    return t
+
+def t_DATE(t):
+    r'"date"'
+    return t
+def t_NUMBERLONG(t):
+    r'"\$numberLong"'
+    return t
+def t_SDATE(t):
+    r'"\$date"'
+    return t
 
 t_ignore = ' \t\n'
 
