@@ -77,15 +77,15 @@ with open('output.csv', 'w', newline='') as csvfile:
 
     writer.writeheader()
 
-    for i in data:
-        flat_record = {
-            "_id": i["_id"]["$oid"],
-            "name": i["name"],
-            "email": i["email"],
-            "movie_id": i["movie_id"]["$oid"],
-            "text": i["text"],
-            "date": i["date"]["$date"]["$numberLong"]
+    for usuario in data:
+        dic_usuario = {
+            "_id": usuario["_id"]["$oid"],
+            "name": usuario["name"],
+            "email": usuario["email"],
+            "movie_id": usuario["movie_id"]["$oid"],
+            "text": usuario["text"],
+            "date": usuario["date"]["$date"]["$numberLong"]
             
         }
-        writer.writerow(flat_record)
+        writer.writerow(dic_usuario)
 
