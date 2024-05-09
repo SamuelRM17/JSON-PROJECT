@@ -1,7 +1,7 @@
 import inspect
 import json
 import ply.yacc as yacc
-import ply.lex as lex  # Importa lex
+import ply.lex as lex 
 from lex import tokens
 import csv
 import sys
@@ -52,15 +52,16 @@ with open('/Users/samuelromero/Desktop/LexYaccMiniProject/JSON/JSON-PROJECT/test
 
 lex.lexer.input(contenido_archivo)
 
-for tok in lex.lexer:
-    print(tok)
+# for tok in lex.lexer:
+#     print(tok)
 
 resultado = parser.parse(contenido_archivo)
-#print(resultado)
+print(resultado)
 
 #Transformamos el resultado a un diccionario
 data = json.loads(resultado)
 print(data)
+print("El JSON es válido")
 
 
 campos = [
