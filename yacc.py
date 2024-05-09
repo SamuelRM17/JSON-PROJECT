@@ -1,10 +1,8 @@
-import inspect
 import json
 import ply.yacc as yacc
 import ply.lex as lex 
 from lex import tokens
 import csv
-import sys
 
 def p_json(p):
     'json : CORCHETE_IZQ elementos CORCHETE_DER'
@@ -52,8 +50,8 @@ with open('/Users/samuelromero/Desktop/LexYaccMiniProject/JSON/JSON-PROJECT/test
 
 lex.lexer.input(contenido_archivo)
 
-# for tok in lex.lexer:
-#     print(tok)
+for tok in lex.lexer:
+    print(tok)
 
 resultado = parser.parse(contenido_archivo)
 print(resultado)
