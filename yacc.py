@@ -4,6 +4,14 @@ import ply.lex as lex
 from lex import tokens
 import csv
 
+id = []
+name = []
+email = []
+movie_id = []
+text = []
+date = []
+
+
 def p_json(p):
     'json : CORCHETE_IZQ elementos CORCHETE_DER'
     p[0]= p[1] + p[2] + p[3]
@@ -19,27 +27,33 @@ def p_elementos_2(p):
 def p_ID(p):
     'p_ID : ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER'
     p[0]= p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7]
+    id.append(p[6])
+
 
 def p_name(p):
     'p_name : NAME DOSPUNTOS CADENA'
     p[0]= p[1] + p[2] + p[3]
+    name.append(p[3])
 
 def p_email(p):
     'p_email : EMAIL DOSPUNTOS CADENA'
     p[0]= p[1] + p[2] + p[3]
+    email.append(p[3])
 
 def p_movie_id(p):
     'p_movie_id : MOVIE_ID DOSPUNTOS LLAVE_IZQ OID DOSPUNTOS CADENA LLAVE_DER'
     p[0]= p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7]
+    movie_id.append(p[6])
 
 def p_text(p):
     'p_text : TEXT DOSPUNTOS CADENA'
     p[0]= p[1] + p[2] + p[3]
+    text.append(p[3])
 
 def p_date(p):
     'p_date : DATE DOSPUNTOS LLAVE_IZQ SDATE DOSPUNTOS LLAVE_IZQ NUMBERLONG DOSPUNTOS CADENA LLAVE_DER LLAVE_DER'
     p[0] = p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7] + p[8] + p[9] + p[10] + p[11]
-
+    date.append(p[9])
 def p_error(p):
     print("Error de sintaxis en '%s'" % p.value)
 
@@ -71,20 +85,28 @@ campos = [
     "date"
 ]
 
+#Limpiamos los datos
+for i in range(len(id)):
+    id[i] = id[i].replace('"', '')
+    name[i] = name[i].replace('"', '')
+    email[i] = email[i].replace('"', '')
+    movie_id[i] = movie_id[i].replace('"', '')
+    text[i] = text[i].replace('"', '')
+    date[i] = date[i].replace('"', '')
+
 with open('output.csv', 'w', newline='') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=campos)
 
     writer.writeheader()
 
-    for usuario in data:
+    for i in range(len(id)):
         dic_usuario = {
-            "_id": usuario["_id"]["$oid"],
-            "name": usuario["name"],
-            "email": usuario["email"],
-            "movie_id": usuario["movie_id"]["$oid"],
-            "text": usuario["text"],
-            "date": usuario["date"]["$date"]["$numberLong"]
-            
+            "_id": id[i],
+            "name": name[i],
+            "email": email[i],
+            "movie_id": movie_id[i],
+            "text": text[i],
+            "date": date[i]
         }
         writer.writerow(dic_usuario)
 
